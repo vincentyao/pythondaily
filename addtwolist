@@ -1,0 +1,16 @@
+#leetcode上面的Add Two Numbers有自己自定义的一套listnode来做，这里试着摆脱它的束缚，自己实现一个，中间从写到调到改到最终，看到结果出来，有收获就好
+
+a1=[5,4,3]
+a2=[5,6,4]
+res=[]
+
+add=[a+b for a,b in zip(a1,a2)]
+for y in add:
+    res.append(y)
+
+for i in range(0,len(res)):
+    if res[i]>=10:
+        res[i]=res[i]%10
+        if i<len(res) and (res[i+1]+1)%10>=0:
+            res[i+1]+=1
+print(res)
