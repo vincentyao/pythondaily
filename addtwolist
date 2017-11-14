@@ -14,3 +14,23 @@ for i in range(0,len(res)):
         if i<len(res) and (res[i+1]+1)%10>=0:
             res[i+1]+=1
 print(res)
+
+#上面的代码有bug，测试数据为：a1=[5,4,6]
+a2=[5,6,4]
+debug之后，重新的代码为:
+a1=[5,4,6]
+a2=[5,6,4]
+res=[]
+
+add=[a+b for a,b in zip(a1,a2)]
+for y in add:
+    res.append(y)
+
+for i in range(0,len(res)):
+    if res[i]>=10:
+        res[i]=res[i]%10
+        if i<len(res) and i+1<len(res):
+            res[i+1]+=1
+        if (i+1)==len(res):
+            res[i]=res[i]%10
+print(res)
