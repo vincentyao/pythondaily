@@ -1,0 +1,26 @@
+def isprime():
+    yield 2
+    idata=singleDt()
+    while True:
+        n=next(idata)
+        yield n
+        idata=filter(Onion(n),idata)
+
+
+def singleDt():
+    y=1
+    while True:
+        y=y+2
+        yield y
+
+def Onion(n):
+    return lambda x:x%n>0
+
+
+
+
+for i in isprime():
+    if i<10:
+        print(i)
+    else:
+        break
