@@ -1,0 +1,89 @@
+import requests
+
+from bs4 import  BeautifulSoup
+
+
+def get_content(url):
+    try:
+        r=requests.get(url)
+        r.raise_for_status()
+        r.encoding="utf-8"
+        return r.text
+    except:
+        return "ERROR:"
+
+def get_htmlcontent(url):
+    comments=[]
+    html_content=get_content(url)
+    soup=BeautifulSoup(html_content, 'lxml')
+    print(soup)
+    # liTags=soup.find_all('li',attrs={'class':' j_thread_list clearfix'})
+    #
+    # for li in liTags:
+    #     comment={}
+    #     try:
+    #         comment['title']=li.find('a', attrs={'class':' j_th_tit'})
+    #         comment['author']=li.find('span', attrs={'class':'tb_icon_author '}).text.strip()
+    #         comment['time'] = li.find('span', attrs={'class': 'pull-right is_show_create_time'}).text.strip()
+    #         comment['replyNum'] = li.find('span', attrs={'class': 'threadlist_rep_num center_text'}).text.strip()
+    #         print(comment['replyNum'])
+    #     except:
+    #         print("some error occur!~")
+
+import requests
+# import json
+# import  time
+from lxml import  etree
+# rs=requests.Session()
+from bs4 import BeautifulSoup
+
+
+
+# url='http://www.bishijie.com/api/news/?size=100'
+#
+# cookies ={
+#     'User-Agent':'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36',
+#     'Cookie':'UM_distinctid=161550289e076a-02f9523c7b3f98-393d5f0e-1fa400-161550289e1a45; CNZZDATA1265004505=1870374980-1517545930-https%253A%252F%252Fcn.bing.com%252F%7C1517816127; Hm_lvt_760519477a6dd9d6ef4ae6014436ab92=1517549687,1517816576; Hm_lpvt_760519477a6dd9d6ef4ae6014436ab92=1517816576'
+#     }
+
+# while True:
+# time.sleep(3000)
+# html = requests.get(url)
+# json_data=json.loads(html.text)
+# data=json_data['data']
+# totals=data['2018-02-05']['buttom']
+#
+#
+#
+# for licontent in totals:
+#      if '路透社' in licontent['content']:
+#         print(licontent['content'])
+
+
+
+urls = 'https://book.douban.com/top250?start=0'
+
+headers = {
+    'User-Agent':'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/55.0.2883.87 Safari/537.36'
+}
+
+html = requests.get(urls,headers=headers).content
+# selector = etree.HTML(html.text)
+# infos = selector.xpath('//tr[@class="item"]')
+# for info in infos:
+#     name = info.xpath('td/div/a/@title')[0]
+#     print(name)
+
+soup=BeautifulSoup(html,'html.parser')
+
+for link in soup.find_all('a'):
+    print(link.get('href'))
+
+
+
+
+
+
+
+
+get_htmlcontent("http://tieba.baidu.com/f?kw=%E8%8A%B3%E5%8D%8E&ie=utf-8&pn=50")
